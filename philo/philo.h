@@ -18,5 +18,16 @@ int		parse_validation(int ac, char **av, t_data *data);
 void	init_philos(t_data *data);
 int		init_sim(t_data *data);
 
+// utils.c
+
+long	get_time(void);
+void	print_status(t_philo *philo, char *status);
+
+//routine
+
+void	philo_eating(t_philo *philo);
+void	*philo_routine(void *arg);
+
+
 
 #endif

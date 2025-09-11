@@ -1,6 +1,6 @@
 
 NAME		= philo
-SRCS		= main.c init.c parse.c
+SRCS		= main.c init.c parse.c utils.c routine.c
 OBJS		= $(SRCS:.c=.o)
 CC 		= cc
 CFLAGS		= -Wall -Wextra -Werror -pthread
