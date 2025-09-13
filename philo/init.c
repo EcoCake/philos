@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 13:36:01 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/09 14:16:53 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/13 14:52:02 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ int	init_sim(t_data *data)
 	data->dead_flag = 0;
 	init_philos(data);
 	return (0);
+}
+
+int	sim_end(t_data *data)
+{
+	int	flag_value;
+
+	pthread_mutex_lock(&data->sim_lock);
+	flag_value = data->dead_flag || data->full_flag;
+	pthread_mutex_unlock(&data->sim_lock);
+	return (flag_value);
 }

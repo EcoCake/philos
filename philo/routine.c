@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:55:28 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/11 15:09:22 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/13 14:53:24 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void	*philo_routine(void *arg)
 	philo->last_meal_time = philo->data->start_time;
 	if(philo->id % 2 == 0) //delay for even philos
 		usleep(1000);
-	while (1)
+	while (!sim_end(philo->data))
 	{
 		philo_eating(philo);
+		if (sim_end(philo->data))
+			break ;
 		print_status(philo, "is eeping");
 		usleep(philo->data->time_to_sleep * 1000);
 		print_status(philo, "is thinking");

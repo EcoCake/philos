@@ -35,6 +35,7 @@ typedef struct s_data
 	int				num_philos;
 	int				meals_to_eat;
 	int				dead_flag;
+	int				full_flag;
 	long			start_time;
 	long			time_to_die;
 	long			time_to_eat;

@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:32:27 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/09 13:34:10 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/13 14:47:43 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,4 @@ int	parse_validation(int ac, char **av, t_data *data)
 		data->meals_to_eat = -1; //arg not set
 	return (0);
 }
+
