@@ -26,6 +26,7 @@ long	get_time(void);
 void	print_status(t_philo *philo, char *status);
 void	cleanup(t_data *data);
 void	check_if_full(t_data *data);
+void	smart_sleep(long duration, t_data *data);
 
 
 //routine

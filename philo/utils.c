@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:47:52 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/13 15:00:32 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/16 17:19:40 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ long	get_time(void)
 
 void	print_status(t_philo *philo, char *status)
 {
+
 	long	timestamp;
+	int		is_dead;
 
 	pthread_mutex_lock(&philo->data->print_lock);
-	timestamp = get_time() - philo->data->start_time;
-	printf("%ld %d %s\n", timestamp, philo->id, status);
+	is_dead = philo->data->dead_flag;
+	if (!is_dead)
+	{
+		timestamp = get_time() - philo->data->start_time;
+		printf("%ld %d %s\n", timestamp, philo->id, status);
+	}
 	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
@@ -75,5 +81,18 @@ void	check_if_full(t_data *data)
 		pthread_mutex_lock(&data->sim_lock);
 		data->full_flag = 1;
 		pthread_mutex_unlock(&data->sim_lock);
+	}
+}
+
+void	smart_sleep(long duration, t_data *data)
+{
+	long	start_time;
+
+	start_time = get_time();
+	while ((get_time() - start_time) < duration)
+	{
+		if (sim_end(data))
+			break;
+		usleep(100);
 	}
 }

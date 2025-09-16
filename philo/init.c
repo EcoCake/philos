@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 13:36:01 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/13 14:52:02 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/16 16:56:45 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,14 @@ int	init_sim(t_data *data)
 
 int	sim_end(t_data *data)
 {
-	int	flag_value;
+	int	is_dead;
+	int	is_full;
 
+	pthread_mutex_lock(&data->print_lock);
+	is_dead = data->dead_flag;
+	pthread_mutex_unlock(&data->print_lock);
 	pthread_mutex_lock(&data->sim_lock);
-	flag_value = data->dead_flag || data->full_flag;
+	is_full = data->full_flag;
 	pthread_mutex_unlock(&data->sim_lock);
-	return (flag_value);
+	return (is_dead || is_full);
 }
