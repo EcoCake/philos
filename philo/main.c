@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 12:38:02 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/16 17:01:19 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:21:28 by alicia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ int	start_sim(t_data *data)
 	data->start_time = get_time();
 	while (i < data->num_philos)
 	{
-		pthread_mutex_lock(&data->philos[i].data_lock);
 		data->philos[i].last_meal_time = data->start_time;
-		pthread_mutex_unlock(&data->philos[i].data_lock);
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philos)
+	{
 		if (pthread_create(&data->philos[i].thread, NULL, &philo_routine, &data->philos[i]) != 0)
 			return (1);
 		i++;
@@ -33,7 +36,9 @@ int	start_sim(t_data *data)
 
 void	monitor_sim(t_data *data)
 {
-	int	i;
+	int		i;
+	long	time_since_meal;
+	int		is_dead;
 	long	timestamp;
 
 	while (!sim_end(data))
@@ -42,20 +47,23 @@ void	monitor_sim(t_data *data)
 		while (i < data->num_philos)
 		{
 			pthread_mutex_lock(&data->philos[i].data_lock);
-			if (get_time() - data->philos[i].last_meal_time > data->time_to_die)
+			time_since_meal = get_time() - data->philos[i].last_meal_time;
+			is_dead = time_since_meal > data->time_to_die;
+			pthread_mutex_unlock(&data->philos[i].data_lock);
+			if (is_dead)
 			{
-				pthread_mutex_lock(&data->print_lock);
+				pthread_mutex_lock(&data->sim_lock);
 				if (data->dead_flag == 0)
 				{
 					data->dead_flag = 1;
+					pthread_mutex_lock(&data->print_lock);
 					timestamp = get_time() - data->start_time;
 					printf("%ld %d died\n", timestamp, data->philos[i].id);
+					pthread_mutex_unlock(&data->print_lock);
 				}
-				pthread_mutex_unlock(&data->print_lock);
-				pthread_mutex_unlock(&data->philos[i].data_lock);
+				pthread_mutex_unlock(&data->sim_lock);
 				return;
 			}
-			pthread_mutex_unlock(&data->philos[i].data_lock);
 			i++;
 		}
 		check_if_full(data);

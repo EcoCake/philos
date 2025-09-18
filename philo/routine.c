@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:55:28 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/16 17:19:18 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:15:31 by alicia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	philo->last_meal_time = philo->data->start_time;
 	if(philo->id % 2 == 0) //delay for even philos
 		usleep(1000);
 	while (!sim_end(philo->data))

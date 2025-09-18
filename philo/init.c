@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 13:36:01 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/16 16:56:45 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:19:34 by alicia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,10 @@ int	init_sim(t_data *data)
 
 int	sim_end(t_data *data)
 {
-	int	is_dead;
-	int	is_full;
+	int	ended;
 
-	pthread_mutex_lock(&data->print_lock);
-	is_dead = data->dead_flag;
-	pthread_mutex_unlock(&data->print_lock);
 	pthread_mutex_lock(&data->sim_lock);
-	is_full = data->full_flag;
+	ended = data->dead_flag || data->full_flag;
 	pthread_mutex_unlock(&data->sim_lock);
-	return (is_dead || is_full);
+	return (ended);
 }

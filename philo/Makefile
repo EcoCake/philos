@@ -3,7 +3,7 @@ NAME		= philo
 SRCS		= main.c init.c parse.c utils.c routine.c
 OBJS		= $(SRCS:.c=.o)
 CC 		= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread
+CFLAGS		= -Wall -Wextra -Werror -pthread #-fsanitize=thread
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)

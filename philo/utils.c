@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:47:52 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/16 17:19:40 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/09/18 20:18:56 by alicia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ long	get_time(void)
 
 void	print_status(t_philo *philo, char *status)
 {
-
 	long	timestamp;
-	int		is_dead;
 
 	pthread_mutex_lock(&philo->data->print_lock);
-	is_dead = philo->data->dead_flag;
-	if (!is_dead)
+	if (!sim_end(philo->data))
 	{
 		timestamp = get_time() - philo->data->start_time;
 		printf("%ld %d %s\n", timestamp, philo->id, status);
