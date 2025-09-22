@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/22 03:08:05 by amezoe            #+#    #+#             */
+/*   Updated: 2025/09/22 03:08:20 by amezoe           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -7,7 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-struct s_data;
+struct	s_data;
 
 typedef enum e_philo_state
 {

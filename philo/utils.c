@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:47:52 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/18 20:18:56 by alicia           ###   ########.fr       */
+/*   Updated: 2025/09/22 03:09:46 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	check_if_full(t_data *data)
 	int	i;
 	int	full_philo_count;
 
-	if(data->meals_to_eat == -1)
+	if (data->meals_to_eat == -1)
 		return ;
 	i = 0;
 	full_philo_count = 0;
@@ -89,7 +89,7 @@ void	smart_sleep(long duration, t_data *data)
 	while ((get_time() - start_time) < duration)
 	{
 		if (sim_end(data))
-			break;
+			break ;
 		usleep(100);
 	}
 }

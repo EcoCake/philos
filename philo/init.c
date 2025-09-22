@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alicia <alicia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 13:36:01 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/18 20:19:34 by alicia           ###   ########.fr       */
+/*   Updated: 2025/09/22 03:07:52 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	init_philos(t_data *data)
 		data->philos[i].eat_count = 0;
 		data->philos[i].state = THINKING;
 		data->philos[i].data = data;
-		pthread_mutex_init(&data->philos[i].data_lock, NULL); // init personal data mutex for each philo
+		pthread_mutex_init(&data->philos[i].data_lock, NULL);
 		data->philos[i].left_fork = &data->forks[i];
-		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos]; // super bigbrain last philos right fork is the firt one at idx 0
+		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
 		i++;
 	}
 }
@@ -45,7 +45,7 @@ int	init_sim(t_data *data)
 	}
 	pthread_mutex_init(&data->print_lock, NULL);
 	pthread_mutex_init(&data->sim_lock, NULL);
-	i = 0; // init mutex for forks
+	i = 0;
 	while (i < data->num_philos)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
