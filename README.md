@@ -23,7 +23,7 @@ The simulation is governed by a simple set of rules:
 ### Compilation
 Clone the repository and run `make`:
 ```bash
-git clone [your-repo-link]
+git clone git@github.com:EcoCake/philos.git
 cd philosophers
 make
 ```
