@@ -6,7 +6,7 @@
 /*   By: amezoe <amezoe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 14:47:52 by amezoe            #+#    #+#             */
-/*   Updated: 2025/09/22 03:09:46 by amezoe           ###   ########.fr       */
+/*   Updated: 2025/10/22 11:25:53 by amezoe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	print_status(t_philo *philo, char *status)
 {
 	long	timestamp;
 
-	pthread_mutex_lock(&philo->data->print_lock);
 	if (!sim_end(philo->data))
 	{
 		timestamp = get_time() - philo->data->start_time;
+		pthread_mutex_lock(&philo->data->print_lock);
 		printf("%ld %d %s\n", timestamp, philo->id, status);
+		pthread_mutex_unlock(&philo->data->print_lock);
 	}
-	pthread_mutex_unlock(&philo->data->print_lock);
 }
 
 void	cleanup(t_data *data)
